@@ -1,0 +1,13 @@
+[Unit]
+Description=Guniicorn server for DOMAIN
+
+[Service]
+Restart=on-failure
+User=elspeth
+WorkingDirectory=/home/elspeth/sites/DOMAIN
+EnvironmentFile=/home/elspeth/sites/DOMAIN/.env
+
+ExecStart=/home/elspeth/Envs/superlists/bin/gunicorn --bind unix:/sockets/DOMAIN.socket superlists.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
