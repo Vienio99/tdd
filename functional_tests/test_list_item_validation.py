@@ -1,4 +1,5 @@
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 from unittest import skip
 from .base import FunctionalTest
 import time
@@ -72,3 +73,9 @@ class ItemValidationTest(FunctionalTest):
         self.wait_for(lambda: self.assertFalse(
             self.get_error_element().is_displayed()
         ))
+    
+    def test_error_messages_are_cleared_on_mouse_hover(self):
+        self.browser.get(self.live_server_url)
+        element_to_hover_over = self.get_item_input_box()
+        hover = ActionChains(self.browser).move_to_element(element_to_hover_over)
+        hover.perform()
